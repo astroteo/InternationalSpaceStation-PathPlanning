@@ -23,7 +23,7 @@ int main(int argc, const char * argv[])
   state_type x0(4);
    x0[0] = 10.0;
    x0[1]= 50;
-   x0[2] = 0.01;
+   x0[2] = 0.1;
    x0[3] = 0;
   state_type y0(4);
 
