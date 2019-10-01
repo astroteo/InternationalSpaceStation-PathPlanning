@@ -15,9 +15,6 @@ const double Ix = 0.3125;
 const double Iy = 0.25;
 const double Iz = 0.5;
 
-
-
-
 void cholessy_wiltshire_2d(const state_type &x, state_type &dxdt,  double /* t */);
 void euler(const state_type &x, state_type &dxdt,  double /* t */);
 std::pair< std::vector<state_type>, std::vector<double> > propagate_2d( state_type x0,double dt, double Ti, double Tf);

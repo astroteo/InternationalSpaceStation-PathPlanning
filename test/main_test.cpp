@@ -2,6 +2,7 @@
 #include "../include/Tester.h"
 
 
+
 TEST(FunctionFillingCube, FillingCubeTest){
 
     double length= 6.;
@@ -23,7 +24,24 @@ TEST(FunctionFillingCube, FillingCubeTest){
 
 }
 
+TEST(StudyTestpp,FoolTests)
+{
 
+
+  int x=0;
+  int y=0;
+
+  int ppx = ++x;
+  int ypp =y++;
+  cout << "x = "<< x<< endl;
+  cout << "++x = "<< ppx<< endl;
+
+  cout << "y = "<< x<< endl;
+  cout << "y++ = "<< ppx<< endl;
+
+  ASSERT_EQ(1,ppx);
+  ASSERT_EQ(0,ypp);
+}
 
 
 GTEST_API_ int main(int argc, char **argv) {

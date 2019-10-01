@@ -114,7 +114,7 @@ SET(gtest_main_slib /Users/teobaiguera/Documents/Study/Kalman_Cpp/googletest/bui
 SET(gtest_slib /Users/teobaiguera/Documents/Study/Kalman_Cpp/googletest/build/googlemock/gtest/libgtest.a)
 
 ####################################################  Program(s)
-
+#file(GLOB ODE_SRCs "src/*.cpp" )
 add_library(ODEs src/integration.cpp
                  src/collection.cpp
                  src/visualization.cpp
@@ -122,7 +122,11 @@ add_library(ODEs src/integration.cpp
                  src/State.cpp
                  src/KalmanFilter.cpp
                  src/simulation.cpp
-                 src/auxiliary.cpp)
+                 src/auxiliary.cpp
+              )
+
+add_library(MAPs  src/Map.cpp
+                  src/BreadthFirstPathPlanner.cpp)
 
 add_executable( ${_project}  main.cpp  )
 add_executable( ${map_project}  map_generator.cpp  )
@@ -134,7 +138,7 @@ target_link_libraries(ODEs ${Boost_LIBRARIES}
 target_link_libraries (${_project} PUBLIC ODEs
                                           )
 
-target_link_libraries (${map_project} PUBLIC
+target_link_libraries (${map_project} PUBLIC MAPs
                                           ${Boost_LIBRARIES}
                                           ${3DTLIB_LIBRARY}
                                           ${PCL_LIBRARIES}

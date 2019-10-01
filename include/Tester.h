@@ -29,11 +29,6 @@ checkBoxDimensions(vector< vector< vector<int> > > int_grid,double length, doubl
 
 }
 
-GTEST_API_ int test_all(int argc, char **argv) {
-    printf("Running main() from %s\n", __FILE__);
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
 
 
 

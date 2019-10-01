@@ -1,2 +1,5 @@
 build/
 -r *-checkpoint.ipynb
+-r *-checkpoint.csv
+
+-r .ipynb_checkpoints
