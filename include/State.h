@@ -30,6 +30,7 @@ public:
 
     for(double pvi : pv)
       elements.push_back(pvi);
+
     rows = 6;
     cols = 1;
   }
@@ -51,8 +52,6 @@ public:
   Point get_p(void);
   Point get_v(void);
   std::vector<double> get_elements(void);
-
-
 
 public:
   Point v;

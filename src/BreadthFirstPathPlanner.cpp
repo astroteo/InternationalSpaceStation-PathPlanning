@@ -1,7 +1,9 @@
 #include "BreadthFirstPathPlanner.h"
+
 #ifndef __dbg
 //#define __dbg true
 #endif
+
 
 map<string,p_type>
 BreadthFirstPathPlanner::get_valid_actions()
@@ -93,6 +95,7 @@ BreadthFirstPathPlanner::do_job(void)
         visited.insert(p_next);
         q.push(p_next);
         goal_branch[p_next] = make_tuple(pt,a.first);
+
       }
     }
   }

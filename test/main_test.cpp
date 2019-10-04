@@ -44,6 +44,11 @@ TEST(StudyTestpp,FoolTests)
 }
 
 
+TEST(ClassStateTest, ClassStateTestConstructor)
+{
+  
+}
+
 GTEST_API_ int main(int argc, char **argv) {
     printf("Running main() from %s\n", __FILE__);
     testing::InitGoogleTest(&argc, argv);
