@@ -4,6 +4,10 @@
 //#define __dbg true
 #endif
 
+#ifndef __dbg_visited
+//#define __dbg_visited true
+#endif
+
 
 map<string,p_type>
 BreadthFirstPathPlanner::get_valid_actions()
@@ -48,7 +52,6 @@ BreadthFirstPathPlanner::do_job(void)
 
   q.push(this->start);
 
-
   cout<< "starting path computation ..."<<endl;
 
   //Path planner
@@ -64,12 +67,15 @@ BreadthFirstPathPlanner::do_job(void)
 
     if(pt == goal)
     {
-      cout << "... path successfully computed" << endl;
+      cout << "... path successfully computed, \n reached goal @-index: "
+           <<goal[0] << "," << goal[1]<<"," << goal[2]
+           << endl;
       path_found = true;
       break;
     }
 
     #ifdef __dbg
+    cout << "#-all-actions: " << actions.size() << endl;
     cout << "#-valid-actions: " << get_valid_actions(pt).size() << endl;
     #endif
 
@@ -90,11 +96,17 @@ BreadthFirstPathPlanner::do_job(void)
                               << "," << p_next[2]<<endl;
       #endif
 
+
+
       if (visited.find(p_next) == visited.end())
       {
         visited.insert(p_next);
         q.push(p_next);
         goal_branch[p_next] = make_tuple(pt,a.first);
+
+        #ifdef __dbg_visited
+        cout << "set-size ==>" << visited.size() <<"<========"<< endl;
+        #endif
 
       }
     }
@@ -116,21 +128,25 @@ BreadthFirstPathPlanner::do_job(void)
 
     controls_.push_back(ctrl);
     p_trajectory.push_back(prv_p);
-
     curr_p = prv_p;
   }
 
+  cout << "---> index trajectory re-created"<<endl;
+
   //get flipped trajectory accessing positions
-  std::vector<string>::iterator pctrl = controls_.end();
-  for(auto p_idxs = p_trajectory.end(); p_idxs != p_trajectory.begin()++; --p_idxs)
+  for(int i = p_trajectory.size()-1; i >=0 ; i--)
   {
-    p_type idxs = *p_idxs;
+    p_type idxs = p_trajectory[i];
+    #ifdef __dbg
+      cout << idxs[0] << ", "<<idxs[1] << ", "<<idxs[2] << endl;
+    #endif
+
     vector<double> tp = mapper->at(idxs[0],idxs[1],idxs[2]);
     trajectory.push_back(tp);
-    controls.push_back(*pctrl);
-    pctrl--;
+    controls.push_back(controls_[i]);
 
   }
+  cout << "... path re-created !" << endl;
     //trajectory.push_back((double) this->mapper)
 
 

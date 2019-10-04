@@ -6,7 +6,7 @@
 #include <numeric>
 
 #ifndef __combine_cube_vertex
-//#define __combine_cube_vertex true // SET CAREFULLY !! >8GB ram needed!!!
+#define __combine_cube_vertex true // SET CAREFULLY !! >8GB ram needed!!!
 #endif
 
 
@@ -30,36 +30,46 @@ class BreadthFirstPathPlanner
       p_type right= {1,0,0}; actions["r"] = right;
       p_type fwrd = {0,1,0}; actions["f"] = fwrd;
       p_type bwrd = {0,-1,0};actions["b"] = bwrd;
-
+      cout << "cccccc"<<endl;
       //Create map adding combinations
       #ifdef __combine_cube_vertex
-      for( auto a1 : actions)
+
+      for(auto a1:actions)
       {
-        for(auto a2 : actions)
+        for(auto a2: actions)
         {
-          p_type ac_point;
-          double ac_point_norm = 0;
-          for(int i=0; i<3; i++)
+          if(a1.first != a2.first && a1.first.length() == 1 && a2.first.length() == 1)
           {
-            ac_point[i]= a1.second[i] + a2.second[i];
-            ac_point_norm += a1.second[i] + a2.second[i];
+            string ac = a1.first + a2.first;
+            sort(ac.begin(),ac.end());
 
-          }
+            bool coaxial_flag = true;
+            double tt = 0;
+            p_type sa,ap;
+            for(int i=0; i<3; i++)
+              ap[i] = a1.second[i] + a2.second[i];
 
-          string ac_name = a1.first + a2.first;
+            int cnt_ones=0;
+            for(auto v:ap)
+            { if(abs(v)==1)
+                cnt_ones += 1;
 
-          if(ac_point_norm> 0 && actions.find(ac_name) ==actions.end())
-          {
+            }
 
-            sort(ac_name.begin(),ac_name.end());
-            actions[ac_name] = ac_point;
+            if(cnt_ones == 2 && actions.find(ac) == actions.end())
+              actions[ac]  = ap;
+
           }
         }
       }
 
+
+      cout << "...evaulating #-" << actions.size()<< " possible actions" <<endl;
+
+      for(auto a : actions)
+        cout << a.first << " => "
+             << a.second[0] <<","<< a.second[1] << "," << a.second[2] << endl;
       #endif
-
-
 
     }
 
@@ -83,7 +93,5 @@ class BreadthFirstPathPlanner
     vector<string> controls;
     vector<p_type> p_trajectory;
     vector<vector<double>> trajectory;
-
-
 
 };

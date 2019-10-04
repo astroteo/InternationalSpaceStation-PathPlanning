@@ -48,6 +48,15 @@ public:
   State(const Matrix<double>& M)
       :
     Matrix<double> (M) {};
+  /*
+  State operator+(State lhs, const& State rhs)
+  {
+    for(int i=0; i<lhs.size(); i++)
+    {
+      lhs[i] += rhs[i]
+    }
+  }
+  */
 
   Point get_p(void);
   Point get_v(void);

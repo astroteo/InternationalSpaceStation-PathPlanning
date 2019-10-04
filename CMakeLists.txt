@@ -126,10 +126,12 @@ add_library(ODEs src/integration.cpp
               )
 
 add_library(MAPs  src/Map.cpp
-                  src/BreadthFirstPathPlanner.cpp)
+                  src/BreadthFirstPathPlanner.cpp
+                  src/visualization.cpp)
 
 add_executable( ${_project}  main.cpp  )
 add_executable( ${map_project}  map_generator.cpp  )
+
 target_link_libraries(ODEs ${Boost_LIBRARIES}
                             ${VTK_LIBRARIES}
                             ${3DTLIB_LIBRARY}

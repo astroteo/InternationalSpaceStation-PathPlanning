@@ -4,6 +4,7 @@
 #include <stdlib.h> // includes atoi
 #include <thread>
 #include <fstream>
+#include <cmath>   
 
 // Builtin classes
 #include "BreadthFirstPathPlanner.h"
@@ -18,10 +19,10 @@
 // Pcl
 #include <pcl/octree/octree_search.h>
 
+// visualization
+#include "visualization.h"
 
 
-#include <gtest/gtest.h>
-#include "Tester.h"
 
 using namespace std;
 using namespace _3dtlib;
@@ -42,7 +43,7 @@ int main(int argc, const char **argv)
 {
   // map-properties
   double voxel_size = .5;
-  double cube_size = .5;
+  double cube_size = 1.0;
   double cube_length = 60.;
   /*('max dims:', 58.64746, 24.784914, 55.6514)
   ('min dims:', -25.899393, -18.903086, -55.6514)*/
@@ -143,6 +144,8 @@ int main(int argc, const char **argv)
   cout <<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
 
   //////////////////////////////////////////////////////////////////////
+
+  display_trajectory(bfs.trajectory);
 
 }
 
