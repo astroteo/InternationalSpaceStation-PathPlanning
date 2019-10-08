@@ -78,6 +78,13 @@ Map::pcl_at(int i, int j, int k)
     return pc;
 }
 
+/* TODO: create grid from input cloud
+void
+Map::create_from_cloud(pcl::PointXYZI cloud)
+{
+
+}
+*/
 
 bool
 Map::is_free(array<int,3> pg)

@@ -4,10 +4,13 @@
 #include <stdlib.h> // includes atoi
 #include <thread>
 #include <fstream>
-#include <cmath>   
 
 // Builtin classes
 #include "BreadthFirstPathPlanner.h"
+
+// Builtin fucntions
+#include "auxiliary.h"
+#include "visualization.h"
 
 // 3dtlib
 #include "3DTlib/math/matrix/matrix.h"
@@ -19,10 +22,6 @@
 // Pcl
 #include <pcl/octree/octree_search.h>
 
-// visualization
-#include "visualization.h"
-
-
 
 using namespace std;
 using namespace _3dtlib;
@@ -30,14 +29,8 @@ using namespace _3dtlib;
 typedef vector<double> ptype;
 
 void read_cloud(const std::string& cloud_file,pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
-template <typename T> std::vector<T> linspace(T a, T b, size_t N);
 void save_cloud(const std::string& map_path, pcl::PointCloud<pcl::PointXYZI>::Ptr cloud);
 
-
-/*
-TEST(CheckIfPointsFree, StartAndGoalTest){
-  ASSERT_TRUE(checkFreePoints(&map))
-}*/
 
 int main(int argc, const char **argv)
 {
@@ -149,18 +142,7 @@ int main(int argc, const char **argv)
 
 }
 
-template <typename T>
-std::vector<T>
-linspace(T a, T b, size_t N)
-{
-    T h = (b - a) / static_cast<T>(N-1);
-    std::vector<T> xs(N);
-    typename std::vector<T>::iterator x;
-    T val;
-    for (x = xs.begin(), val = a; x != xs.end(); ++x, val += h)
-        *x = val;
-    return xs;
-}
+
 
 void
 read_cloud(const std::string& cloud_file, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud)

@@ -114,7 +114,7 @@ SET(gtest_main_slib /Users/teobaiguera/Documents/Study/Kalman_Cpp/googletest/bui
 SET(gtest_slib /Users/teobaiguera/Documents/Study/Kalman_Cpp/googletest/build/googlemock/gtest/libgtest.a)
 
 ####################################################  Program(s)
-#file(GLOB ODE_SRCs "src/*.cpp" )
+#file(GLOB ODE_SRCs "src/*.cpp" ) # <= not preferred here because not all srcs are used for all subprojects
 add_library(ODEs src/integration.cpp
                  src/collection.cpp
                  src/visualization.cpp
@@ -125,9 +125,11 @@ add_library(ODEs src/integration.cpp
                  src/auxiliary.cpp
               )
 
-add_library(MAPs  src/Map.cpp
-                  src/BreadthFirstPathPlanner.cpp
-                  src/visualization.cpp)
+add_library(MAPs  src/BreadthFirstPathPlanner.cpp
+                  src/visualization.cpp
+                  src/auxiliary.cpp
+                  src/State.cpp
+                  src/Map.cpp)
 
 add_executable( ${_project}  main.cpp  )
 add_executable( ${map_project}  map_generator.cpp  )

@@ -14,6 +14,7 @@ using namespace std;
 
 typedef array<int,3> p_type;
 typedef tuple<p_type,string> ap_type;// include tuple {i,j,k}
+typedef tuple<p_type,string,double> ap_astar_type;
 
 class BreadthFirstPathPlanner
 {
@@ -84,7 +85,7 @@ class BreadthFirstPathPlanner
 
   public:
     //algorithm's container(s)
-    Map* mapper;
+    Map *mapper;
     p_type pos,start,goal;
     set<p_type> visited_points;
     map<string,p_type> actions;
