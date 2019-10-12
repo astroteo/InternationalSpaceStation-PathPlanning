@@ -39,6 +39,9 @@ t=in_data.IMU.t;
 % Initialize the navigation state
 x_h=init_navigation_state(u,settings);
 
+disp("state at t0")
+disp(x_h)
+
 % Initialize the sensor bias estimate
 delta_u_h=zeros(6,1);
 
