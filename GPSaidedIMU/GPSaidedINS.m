@@ -61,6 +61,10 @@ out_data.delta_u_h=zeros(6,N);
 ctr_gnss_data=1;
 %ctr_speed_data=1;
 
+disp(Q1)
+disp(Q2)
+
+
 for k=2:N
     
     % Sampling period
@@ -79,6 +83,7 @@ for k=2:N
     % Time update of the Kalman filter state covariance.
     P=F*P*F'+G*blkdiag(Q1,Q2)*G';
     
+    P_BF = P;
     % Defualt measurement observation matrix  and measurement covariance
     % matrix
     
@@ -103,9 +108,13 @@ for k=2:N
         ind(1:3) = 1;
         % Update GNSS data counter
         ctr_gnss_data=min(ctr_gnss_data+1,length(in_data.GNSS.t));
-    end   
-    
         
+        disp("OK GNSS AVAILABLE NOOOOW")
+  
+    
+    else
+         disp("IMU ONLY NOOOOW")
+    end      
 %---> Change needed for tasks 2-4, make sure you understand it...
 %      ind = zeros(1,6);  % index vector, describing available measurements
 %      % Check if GNSS measurement is available
@@ -136,11 +145,14 @@ for k=2:N
     y=y(ind);
     R=R(ind,ind);
     
+    
     % Calculate the Kalman filter gain.
     K=(P*H')/(H*P*H'+R);
     
+    disp(K)
     % Update the perturbation state estimate.
     z=[zeros(9,1); delta_u_h]+K*(y-H(:,1:6)*x_h(1:6));
+    disp(z)
     
     % Correct the navigation states using current perturbation estimates.
     x_h(1:6)=x_h(1:6)+z(1:6);
@@ -149,6 +161,7 @@ for k=2:N
     
     % Update the Kalman filter state covariance.
     P=(eye(15)-K*H)*P;
+    disp(P-P_BF)
     
     % Save the data to the output data structure
     out_data.x_h(:,k)=x_h;
