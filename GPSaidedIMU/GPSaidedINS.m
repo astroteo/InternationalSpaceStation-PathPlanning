@@ -113,7 +113,7 @@ for k=2:N
   
     
     else
-         disp("IMU ONLY NOOOOW")
+         %disp("IMU ONLY NOOOOW")
     end      
 %---> Change needed for tasks 2-4, make sure you understand it...
 %      ind = zeros(1,6);  % index vector, describing available measurements
@@ -149,10 +149,10 @@ for k=2:N
     % Calculate the Kalman filter gain.
     K=(P*H')/(H*P*H'+R);
     
-    disp(K)
+    %disp(K)
     % Update the perturbation state estimate.
     z=[zeros(9,1); delta_u_h]+K*(y-H(:,1:6)*x_h(1:6));
-    disp(z)
+    %disp(z)
     
     % Correct the navigation states using current perturbation estimates.
     x_h(1:6)=x_h(1:6)+z(1:6);
@@ -161,7 +161,7 @@ for k=2:N
     
     % Update the Kalman filter state covariance.
     P=(eye(15)-K*H)*P;
-    disp(P-P_BF)
+    %disp(P-P_BF)
     
     % Save the data to the output data structure
     out_data.x_h(:,k)=x_h;

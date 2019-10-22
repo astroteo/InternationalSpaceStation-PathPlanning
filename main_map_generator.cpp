@@ -6,7 +6,8 @@
 #include <fstream>
 
 // Builtin classes
-#include "BreadthFirstPathPlanner.h"
+//#include "BreadthFirstPathPlanner.h"
+#include "OptimalFuelBreadthFirstPathPlanner.h"
 
 // Builtin fucntions
 #include "auxiliary.h"
@@ -27,6 +28,7 @@ using namespace std;
 using namespace _3dtlib;
 
 typedef vector<double> ptype;
+typedef vector<double> vtype;
 
 void read_cloud(const std::string& cloud_file,pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
 void save_cloud(const std::string& map_path, pcl::PointCloud<pcl::PointXYZI>::Ptr cloud);
@@ -134,11 +136,16 @@ int main(int argc, const char **argv)
   if(!collision_flag)
     cout << "no collision occurred"<<endl;
 
+    display_trajectory(bfs.trajectory);
   cout <<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
 
   //////////////////////////////////////////////////////////////////////
 
-  display_trajectory(bfs.trajectory);
+  vtype v_start = {0.,0.,0.};
+  OptimalFuelBreadthFirstPathPlanner ofbfs(&map,v_start);
+  ofbfs.do_job();
+  cout <<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
+
 
 }
 

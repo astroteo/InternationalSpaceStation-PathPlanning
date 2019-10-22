@@ -25,26 +25,3 @@ vector<T> linspace(T a, T b, size_t N)
         *x = val;
     return xs;
 }
-
-
-
-q_s^{2}+ q_x^2− q_y^2 − q_z^2
-2 · (qx · qy − qz · qs) 2 · (qx · qz + qy · qs)
-2 · (qx · qy + qz · qs) q
-2
-s − q
-2
-x + q
-2
-y − q
-2
-z
-2 · (qy · qz − qx · qs)
-2 · (qx · qz − qy · qs) 2 · (qy · qz + qx · qs) q
-2
-s − q
-2
-x − q
-2
-y + q
-2

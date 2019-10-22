@@ -52,7 +52,7 @@ BreadthFirstPathPlanner::do_job(void)
 
   q.push(this->start);
 
-  cout<< "starting path computation ..."<<endl;
+  cout<< "standard BFS path computation ..."<<endl;
 
   //Path planner
   while (!q.empty())

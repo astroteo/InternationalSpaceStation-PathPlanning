@@ -31,7 +31,7 @@ class BreadthFirstPathPlanner
       p_type right= {1,0,0}; actions["r"] = right;
       p_type fwrd = {0,1,0}; actions["f"] = fwrd;
       p_type bwrd = {0,-1,0};actions["b"] = bwrd;
-      cout << "cccccc"<<endl;
+
       //Create map adding combinations
       #ifdef __combine_cube_vertex
 
@@ -66,10 +66,6 @@ class BreadthFirstPathPlanner
 
 
       cout << "...evaulating #-" << actions.size()<< " possible actions" <<endl;
-
-      for(auto a : actions)
-        cout << a.first << " => "
-             << a.second[0] <<","<< a.second[1] << "," << a.second[2] << endl;
       #endif
 
     }
@@ -78,7 +74,7 @@ class BreadthFirstPathPlanner
       //Actions:
       map<string,p_type> get_valid_actions(void);
       map<string,p_type> get_valid_actions(p_type ev_pos);
-      void do_job(void);
+      virtual void do_job(void);
       void save_trajectory(const string& path, double vis_intensity =0);
 
 

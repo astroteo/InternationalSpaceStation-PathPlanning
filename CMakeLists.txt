@@ -125,14 +125,15 @@ add_library(ODEs src/integration.cpp
                  src/auxiliary.cpp
               )
 
-add_library(MAPs  src/BreadthFirstPathPlanner.cpp
+add_library(MAPs  src/State.cpp
+                  src/BreadthFirstPathPlanner.cpp
+                  src/OptimalFuelBreadthFirstPathPlanner.cpp
                   src/visualization.cpp
                   src/auxiliary.cpp
-                  src/State.cpp
                   src/Map.cpp)
 
-add_executable( ${_project}  main.cpp  )
-add_executable( ${map_project}  map_generator.cpp  )
+add_executable( ${_project}  main_Kalman.cpp  )
+add_executable( ${map_project}  main_map_generator.cpp  )
 
 target_link_libraries(ODEs ${Boost_LIBRARIES}
                             ${VTK_LIBRARIES}

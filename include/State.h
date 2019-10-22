@@ -11,6 +11,9 @@ using namespace std;
 class State : public Matrixd
 {
 public:
+
+  State(){};
+
   State( vector<double> pv)
   {
     if(pv.size() > 4)
@@ -39,10 +42,16 @@ public:
   {
     p = p_;
     v = v_;
+
     this->elements.push_back(p_[0]);
     this->elements.push_back(p_[1]);
+    if(p_.c() > 2 || p_.r() > 2)
+      this->elements.push_back(p_[2]);
+
     this->elements.push_back(v_[0]);
     this->elements.push_back(v_[1]);
+    if(v_.c() > 2 || v_.r() > 2)
+      this->elements.push_back(v_[2]);
   }
 
   State(const Matrix<double>& M)
