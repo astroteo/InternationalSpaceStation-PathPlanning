@@ -53,8 +53,14 @@ x(1:6)=A*x(1:6)+B*acc_t;
 w_tb=u(4:6);
 
 P=w_tb(1)*dt;
+disp('P: ')
+disp(P)
 Q=w_tb(2)*dt;
+disp('Q: ')
+disp(Q)
 R=w_tb(3)*dt;
+disp('R: ')
+disp(R)
 
 
 OMEGA=zeros(4);
@@ -62,6 +68,8 @@ OMEGA(1,1:4)=0.5*[0 R -Q P];
 OMEGA(2,1:4)=0.5*[-R 0 P Q];
 OMEGA(3,1:4)=0.5*[Q -P 0 R];
 OMEGA(4,1:4)=0.5*[-P -Q -R 0];
+
+disp(OMEGA)
 
 v=norm(w_tb)*dt;
 

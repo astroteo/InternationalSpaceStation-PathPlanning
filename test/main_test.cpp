@@ -6,6 +6,9 @@
 #include "3DTlib/math/point.h"
 #include "3DTlib/math/matrix/matrix.h"
 
+
+#include <cmath>
+
 TEST(StudyTestpp,FoolTests)
 {
 
@@ -104,12 +107,12 @@ TEST(ClassStateTest, ClassStateTestSum)
   {
 
     //Test sum
-    EXPECT_TRUE((s_sum.p[i] - (p1[i] + p2[i]) < 1e-7) || (s_sum.p[i] - (p1[i] + p2[i]) > -1e-7));
-    EXPECT_TRUE((s_sum.v[i] - (v1[i] + v2[i]) < 1e-7) || (s_sum.p[i] - (v1[i] + v2[i]) > -1e-7));
+    EXPECT_TRUE((s_sum.p[i] - (p1[i] + p2[i]) < 1e-17) || (s_sum.p[i] - (p1[i] + p2[i]) > -1e-17));
+    EXPECT_TRUE((s_sum.v[i] - (v1[i] + v2[i]) < 1e-17) || (s_sum.p[i] - (v1[i] + v2[i]) > -1e-17));
 
     //Test diff
-    EXPECT_TRUE((s_diff.p[i] - (p1[i] - p2[i]) < 1e-7) || (s_sum.p[i] - (p1[i] - p2[i]) > -1e-7));
-    EXPECT_TRUE((s_diff.v[i] - (v1[i] - v2[i]) < 1e-7) || (s_sum.p[i] - (v1[i] - v2[i]) > -1e-7));
+    EXPECT_TRUE((s_diff.p[i] - (p1[i] - p2[i]) < 1e-17) || (s_sum.p[i] - (p1[i] - p2[i]) > -1e-17));
+    EXPECT_TRUE((s_diff.v[i] - (v1[i] - v2[i]) < 1e-17) || (s_sum.p[i] - (v1[i] - v2[i]) > -1e-17));
 
 
   }
@@ -117,6 +120,49 @@ TEST(ClassStateTest, ClassStateTestSum)
 
 
 }
+
+TEST(MatrixStateMultiplyTest, ClassStateTestMatrixMultiply)
+{
+
+  _3dtlib::Matrixd A = {{1,0,0,0,0,0},
+                        {0,1,0,0,0,0},
+                        {0,0,1,0,0,0},
+                        {0,0,0,1,0,0},
+                        {0,0,0,0,1,0},
+                        {0,0,0,0,0,1}};
+
+  _3dtlib::Point pi(0,0,10);
+  _3dtlib::Point vi(1,0,0);
+  std::vector<double> s_ = {0.,0.,10.,1.,0.,0.};
+  State s_i(s_);
+
+  State s_new = A * s_i;
+
+  cout << "x-old: " << s_i.get_p()[0]
+       << " x-new: " << s_new.get_elements()[0]
+       <<endl;
+
+  cout << "y-old: " << s_i.get_p()[1]
+       << " y-new: " << s_new.get_elements()[1]
+       <<endl;
+
+  cout << "z-old: " << s_i.get_p()[2]
+       << " z-new: " << s_new.get_elements()[2]
+       <<endl;
+
+  for (unsigned int i=0; i<3 ; i++)
+  {
+
+    EXPECT_TRUE(abs(s_new.get_p()[i] - s_i.get_p()[i]) < 1e-17);
+    //EXPECT_TRUE(abs(s_new.get_v()[i] - s_i.get_v()[i]) < 1e-17);
+
+  }
+
+}
+
+
+
+
 
 
 GTEST_API_ int main(int argc, char **argv) {

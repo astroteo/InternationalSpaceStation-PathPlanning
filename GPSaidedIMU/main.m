@@ -1,3 +1,5 @@
+close all
+clear all
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                           
 % Main script for the loosely-coupled feedback GNSS-aided INS system. 

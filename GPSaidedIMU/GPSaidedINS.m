@@ -60,10 +60,11 @@ out_data.delta_u_h=zeros(6,N);
 %% Information fusion
 ctr_gnss_data=1;
 %ctr_speed_data=1;
-
+disp('------------------------Q1')
 disp(Q1)
+disp('------------------------Q2')
 disp(Q2)
-
+disp('------------------------Q2')
 
 for k=2:N
     
@@ -82,6 +83,9 @@ for k=2:N
     
     % Time update of the Kalman filter state covariance.
     P=F*P*F'+G*blkdiag(Q1,Q2)*G';
+    %disp(P)
+    disp(blkdiag(Q1,Q2))
+    disp(size(blkdiag(Q1,Q2)))
     
     P_BF = P;
     % Defualt measurement observation matrix  and measurement covariance
@@ -113,7 +117,7 @@ for k=2:N
   
     
     else
-         %disp("IMU ONLY NOOOOW")
+         disp("IMU ONLY NOOOOW")
     end      
 %---> Change needed for tasks 2-4, make sure you understand it...
 %      ind = zeros(1,6);  % index vector, describing available measurements
@@ -144,6 +148,8 @@ for k=2:N
     H=H(ind,:);
     y=y(ind);
     R=R(ind,ind);
+    
+    disp(H)
     
     
     % Calculate the Kalman filter gain.
