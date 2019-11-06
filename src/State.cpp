@@ -2,7 +2,7 @@
 #include "State.h"
 Point
 State::
-get_p(void)
+p(void)
 {
   if( this->elements.size() > 4)
   {
@@ -10,7 +10,7 @@ get_p(void)
              this->elements[1],
              this->elements[2]);
 
-    this->p = p_;
+    this->pos = p_;
 
   }
   else
@@ -18,16 +18,16 @@ get_p(void)
     Point p_(this->elements[0],
              this->elements[1]);
 
-    this->p = p_;
+    this->pos = p_;
   }
 
 
-  return this->p;
+  return this->pos;
 }
 
 Point
 State::
-get_v(void)
+v(void)
 {
   if( this->elements.size() > 4)
   {
@@ -35,16 +35,16 @@ get_v(void)
              this->elements[4],
              this->elements[5]);
 
-    this->v = v_;
+    this->vel = v_;
   }
   else
   {
     Point v_(this->elements[2],
              this->elements[3]);
-    this->v = v_;
+    this->vel = v_;
   }
 
-  return this->v;
+  return this->vel;
 }
 
 std::vector<double>
@@ -52,4 +52,11 @@ State::
 get_elements(void)
 {
   return this->elements;
+}
+
+double
+State::
+pnorm(void)
+{
+  return sqrt(pow(this->pos[0],2)+pow(this->pos[1],2)+pow(this->pos[0],2));
 }

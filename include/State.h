@@ -20,8 +20,8 @@ public:
     {
       Point _v(pv[3],pv[4],pv[5]);
       Point _p(pv[0],pv[1],pv[2]);
-      this->v = _v;
-      this->p = _p;
+      this->vel = _v;
+      this->pos = _p;
       rows = 6;
       cols = 1;
     }
@@ -29,8 +29,8 @@ public:
     {
       Point _v(pv[2],pv[3]);
       Point _p(pv[0],pv[1]);
-      this->v = _v;
-      this->p = _p;
+      this->vel = _v;
+      this->pos = _p;
       rows = 4;
       cols = 1;
     }
@@ -43,8 +43,8 @@ public:
 
   State(Point p_, Point v_)
   {
-    p = p_;
-    v = v_;
+    pos = p_;
+    vel  = v_;
     rows = 4;
     cols = 1;
 
@@ -64,6 +64,47 @@ public:
 
   }
 
+  State(double px, double py,
+        double vx, double vy)
+  {
+
+    this->elements.push_back(px);
+    this->elements.push_back(py);
+
+    Point p_(px,py);
+    this->pos = p_;
+
+    this->elements.push_back(vx);
+    this->elements.push_back(vy);
+
+    Point v_(vx,vy);
+    this->vel = v_;
+
+    rows = 4;
+    cols = 1;
+
+  }
+  State(double px, double py, double pz,
+        double vx, double vy, double vz)
+  {
+    this->elements.push_back(px);
+    this->elements.push_back(py);
+    this->elements.push_back(pz);
+
+    Point p_(px,py,pz);
+    this->pos = p_;
+
+    this->elements.push_back(vx);
+    this->elements.push_back(vy);
+    this->elements.push_back(vz);
+
+    Point v_(vx,vy,vz);
+    this->vel = v_;
+
+    rows = 6;
+    cols = 1;
+  }
+
   State(const Matrix<double>& M)
       :
     Matrix<double> (M) {};
@@ -76,14 +117,13 @@ public:
     }
   }
   */
-  //TODO: change method names to p(), v()
-  Point get_p(void);
-  Point get_v(void);
+  Point p(void);
+  Point v(void);
   std::vector<double> get_elements(void);
+  double pnorm(void);
 
-public://TODO: change name v->vel, p->pos
-       //TODO: make p,v protected
-  Point v;
-  Point p;
+protected:
+  Point vel;
+  Point pos;
 };
 #endif
